@@ -1,0 +1,32 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+dist-ssr/
+
+# logs
+*.log
+npm-debug.log*
+
+# env files (never commit)
+.env
+.env.*
+!.env.example
+
+# editor / OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Supabase CLI local state
+supabase/.temp/
+supabase/.branches/
+
+# Sandboxed HOME for the Supabase CLI (keeps it from polluting ~/.supabase)
+.supabase-home/
+
+# misc
+*.local

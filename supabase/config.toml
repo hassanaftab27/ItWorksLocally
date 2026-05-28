@@ -1,0 +1,8 @@
+# Supabase CLI project config. Most values are only used by `supabase start`
+# (the local stack), which we don't run for this project — everything goes
+# against the linked hosted project. Kept minimal.
+
+project_id = "itworkslocally"
+
+[functions.admin-ops]
+verify_jwt = true
