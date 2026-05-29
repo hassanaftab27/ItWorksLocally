@@ -56,10 +56,14 @@ export function toDatetimeLocal(iso: string | null | undefined): string {
   if (!iso) return "";
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return "";
+  // Snap to the nearest 30 minutes so the value is valid for the 30-min picker
+  // (an off-step value would mark the input invalid and block form submit).
+  const step = 30 * 60 * 1000;
+  const snapped = new Date(Math.round(d.getTime() / step) * step);
   const pad = (n: number) => String(n).padStart(2, "0");
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(
-    d.getHours()
-  )}:${pad(d.getMinutes())}`;
+  return `${snapped.getFullYear()}-${pad(snapped.getMonth() + 1)}-${pad(
+    snapped.getDate()
+  )}T${pad(snapped.getHours())}:${pad(snapped.getMinutes())}`;
 }
 
 export function relativeTime(iso: string | null | undefined): string {

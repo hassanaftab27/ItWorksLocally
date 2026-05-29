@@ -39,7 +39,7 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
             onError={() => setBrokenLogo(companyLogo)}
           />
         )}
-        <img src="/logo.svg" alt="" className="size-6 shrink-0 rounded" />
+        <img src="/logo.svg?v=2" alt="" className="size-6 shrink-0 rounded" />
         <span className="select-none truncate font-semibold">ItWorksLocally</span>
       </div>
 

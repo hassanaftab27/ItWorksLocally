@@ -16,6 +16,9 @@ import {
 import { ProfileDialog } from "@/components/ProfileDialog";
 import { OrganizationDialog } from "@/components/OrganizationDialog";
 
+// "0.2.0" -> "0.2" (major.minor) for the menu footer.
+const appVersion = __APP_VERSION__.split(".").slice(0, 2).join(".");
+
 export function UserMenu() {
   const { profile } = useSession();
   const [profileOpen, setProfileOpen] = useState(false);
@@ -56,6 +59,7 @@ export function UserMenu() {
           </DropdownMenuItem>
           {isAdmin(profile) && (
             <>
+              <DropdownMenuSeparator />
               <DropdownMenuItem onSelect={() => setOrgOpen(true)}>
                 <Building2 className="size-4" /> Organization
               </DropdownMenuItem>
@@ -75,6 +79,10 @@ export function UserMenu() {
           <DropdownMenuItem onSelect={() => supabase.auth.signOut()}>
             <LogOut className="size-4" /> Sign out
           </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <div className="px-2 py-1 text-center text-xs text-muted-foreground">
+            v{appVersion} Beta
+          </div>
         </DropdownMenuContent>
       </DropdownMenu>
 

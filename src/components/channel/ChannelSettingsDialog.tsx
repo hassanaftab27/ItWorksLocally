@@ -85,6 +85,7 @@ export function ChannelSettingsDialog({
         description: description.trim() || null,
       });
       if (wasRename) navigate(`/channels/${normalized}`, { replace: true });
+      onOpenChange(false);
     } catch (err) {
       setError((err as Error).message);
     }

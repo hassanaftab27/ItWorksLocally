@@ -14,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { UserMultiSelect } from "@/components/ui/user-multi-select";
 import { CategorySelect } from "@/components/ui/category-select";
+import { DateTimePicker } from "@/components/ui/datetime-picker";
 import { STATUSES, STATUS_LABELS } from "@/lib/statuses";
 import { PRIORITIES, PRIORITY_LABELS } from "@/lib/priorities";
 import { relativeTime, toDatetimeLocal, userName } from "@/lib/format";
@@ -184,20 +185,13 @@ export function TicketModal({
               </select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="t-status">Column</Label>
-              <select
-                id="t-status"
-                value={status}
-                onChange={(e) => setStatus(e.target.value as TicketStatus)}
+              <Label>Category</Label>
+              <CategorySelect
+                available={categories}
+                selectedId={categoryId}
+                onChange={setCategoryId}
                 disabled={readOnly}
-                className="flex h-9 w-full rounded-md border border-input bg-background px-3 text-sm shadow-sm disabled:opacity-50"
-              >
-                {STATUSES.map((s) => (
-                  <option key={s} value={s}>
-                    {STATUS_LABELS[s]}
-                  </option>
-                ))}
-              </select>
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="t-priority">Priority</Label>
@@ -219,21 +213,27 @@ export function TicketModal({
 
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_1.3fr_0.7fr]">
             <div className="space-y-2">
-              <Label>Category</Label>
-              <CategorySelect
-                available={categories}
-                selectedId={categoryId}
-                onChange={setCategoryId}
+              <Label htmlFor="t-status">Column</Label>
+              <select
+                id="t-status"
+                value={status}
+                onChange={(e) => setStatus(e.target.value as TicketStatus)}
                 disabled={readOnly}
-              />
+                className="flex h-9 w-full rounded-md border border-input bg-background px-3 text-sm shadow-sm disabled:opacity-50"
+              >
+                {STATUSES.map((s) => (
+                  <option key={s} value={s}>
+                    {STATUS_LABELS[s]}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="t-due">Due date</Label>
-              <Input
+              <Label htmlFor="t-due">Due date and time</Label>
+              <DateTimePicker
                 id="t-due"
-                type="datetime-local"
                 value={dueDate}
-                onChange={(e) => setDueDate(e.target.value)}
+                onChange={setDueDate}
                 disabled={readOnly}
               />
             </div>

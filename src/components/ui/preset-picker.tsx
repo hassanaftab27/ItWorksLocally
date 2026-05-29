@@ -1,4 +1,4 @@
-import type { PresetPair } from "@/lib/presets";
+import { presetLabel, type PresetPair } from "@/lib/presets";
 import { SplitBadge } from "@/components/ui/split-badge";
 import { cn } from "@/lib/utils";
 
@@ -27,8 +27,8 @@ export function PresetPicker({
             type="button"
             disabled={disabled}
             onClick={() => onChange(id)}
-            title={id}
-            aria-label={id}
+            title={presetLabel(id)}
+            aria-label={presetLabel(id)}
             aria-pressed={selected}
             className={cn(
               "relative inline-flex items-center justify-center rounded-full transition",

@@ -38,6 +38,14 @@ export function organizationLogoUrl(org: Organization | null | undefined): strin
   return `${data.publicUrl}?t=${encodeURIComponent(org.updated_at)}`;
 }
 
+// Public URL by fixed path -- usable pre-auth (e.g. the login page), where the
+// organization table isn't readable. Returns a URL even if no logo exists;
+// callers should hide the image on load error.
+export function publicOrgLogoUrl(): string {
+  const { data } = supabase.storage.from(BUCKET).getPublicUrl(LOGO_PATH);
+  return data.publicUrl;
+}
+
 export function useUploadOrgLogo() {
   const qc = useQueryClient();
   return useMutation({
